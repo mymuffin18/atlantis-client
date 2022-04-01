@@ -9,6 +9,7 @@ import Dashboard from './components/dashboardAdmin/Dashboard';
 import UserList from './components/dashboardAdmin/UserList';
 import ApproveDisaster from './components/dashboardAdmin/ApproveDisaster';
 import DashboardUser from './components/dashboardUser/DashboardUser';
+import LandingPage from './components/LandingPage';
 
 function App() {
   const admin = useAdminAuth();
@@ -17,11 +18,12 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path='/' element={<LandingPage />} />
         <Route
-          path='/'
+          path='/admin'
           element={
             admin.state.token ? (
-              <Navigate replace={false} to='admin/dashboard' />
+              <Navigate replace={false} to='/admin/dashboard' />
             ) : (
               <AdminLogin />
             )
@@ -29,7 +31,7 @@ function App() {
         />
 
         <Route
-          path='/login'
+          path='/user'
           element={
             user.state.token ? (
               <Navigate replace={false} to='/user/dashboard' />
@@ -50,7 +52,7 @@ function App() {
           }
         />
 
-        <Route path='admin/dashboard' element={<Dashboard />}>
+        <Route path='/admin/dashboard' element={<Dashboard />}>
           <Route path='userlist' element={<UserList />} />
           <Route path='approved-disaster' element={<ApproveDisaster />} />
         </Route>
