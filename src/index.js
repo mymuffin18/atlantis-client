@@ -6,13 +6,16 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import AdminAuthContextProvider from './context/AdminAuthContextProvider';
 import UserAuthContextProvider from './context/UserAuthContextProvider';
+import EarthquakeContextProvider from './context/EarthquakeContextProvider';
 
 ReactDOM.render(
 	<AdminAuthContextProvider>
 		<UserAuthContextProvider>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
+			<EarthquakeContextProvider>
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
+			</EarthquakeContextProvider>
 		</UserAuthContextProvider>
 	</AdminAuthContextProvider>,
 	document.getElementById('root')
