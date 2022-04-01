@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.centerText {
+  text-align: center;
+}
+
+.verticalCenter {
+  flex: 1;
+  justify-content: center;
+  line-height: 100px;
+}
+
+.map1 {
+  height: 480.5px;
+  width: 100%;
+  object-fit: cover;
+}
+.map1sm {
+  height: 100px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.map2 {
+  height: 70%;
+  width: 70%;
+  object-fit: cover;
+}
+
+.height {
+  height: 100%;
+}
+
+.widthko {
+  width: 100vw;
+}
