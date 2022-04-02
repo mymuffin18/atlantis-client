@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useReducer } from 'react';
 const initialState = {
 	user: {},
 	token: null,
+	loading: false,
 };
 
 const reducer = (state, action) => {
@@ -11,6 +12,16 @@ const reducer = (state, action) => {
 			return {
 				user: action.payload.user,
 				token: action.payload.token,
+			};
+		case 'LOADING_START':
+			return {
+				...state,
+				loading: true,
+			};
+		case 'LOADING_FINISH':
+			return {
+				...state,
+				loading: false,
 			};
 		case 'LOGOUT':
 			return initialState;

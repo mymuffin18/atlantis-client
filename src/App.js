@@ -10,62 +10,82 @@ import UserList from './components/dashboardAdmin/UserList';
 import ApproveDisaster from './components/dashboardAdmin/ApproveDisaster';
 import DashboardUser from './components/dashboardUser/DashboardUser';
 import LandingPage from './components/LandingPage';
+import UserRoutes from './routes/UserRoutes';
 
 function App() {
-  const admin = useAdminAuth();
-  const user = useUserAuth();
+	const admin = useAdminAuth();
+	const user = useUserAuth();
 
-  return (
-    <>
-      <Routes>
-        <Route path='/' element={<LandingPage />} />
-        <Route
-          path='/admin'
-          element={
-            admin.state.token ? (
-              <Navigate replace={false} to='/admin/dashboard' />
-            ) : (
-              <AdminLogin />
-            )
-          }
-        />
+	return (
+		<>
+			<Routes>
+				<Route path='/' element={<LandingPage />} />
+				<Route
+					path='/admin'
+					element={
+						admin.state.token ? (
+							<Navigate
+								replace={false}
+								to='/admin/dashboard'
+							/>
+						) : (
+							<AdminLogin />
+						)
+					}
+				/>
 
-        <Route
-          path='/user'
-          element={
-            user.state.token ? (
-              <Navigate replace={false} to='/user/dashboard' />
-            ) : (
-              <Login />
-            )
-          }
-        />
+				<Route
+					path='/user'
+					element={
+						user.state.token ? (
+							<Navigate
+								replace={false}
+								to='/user/dashboard'
+							/>
+						) : (
+							<Login />
+						)
+					}
+				/>
 
-        <Route
-          path='/register'
-          element={
-            user.state.token ? (
-              <Navigate replace={false} to='/user/dashboard' />
-            ) : (
-              <Register />
-            )
-          }
-        />
+				<Route
+					path='/register'
+					element={
+						user.state.token ? (
+							<Navigate
+								replace={false}
+								to='/user/dashboard'
+							/>
+						) : (
+							<Register />
+						)
+					}
+				/>
 
-        <Route path='/admin/dashboard' element={<Dashboard />}>
-          <Route path='userlist' element={<UserList />} />
-          <Route path='approved-disaster' element={<ApproveDisaster />} />
-        </Route>
+				<Route path='/admin/dashboard' element={<Dashboard />}>
+					<Route path='userlist' element={<UserList />} />
+					<Route
+						path='approved-disaster'
+						element={<ApproveDisaster />}
+					/>
+				</Route>
 
-        <Route path='user/dashboard' element={<DashboardUser />}></Route>
-      </Routes>
-      {/* <Routes>
+				<Route
+					path='user/dashboard'
+					element={
+						<UserRoutes>
+							<DashboardUser />
+						</UserRoutes>
+					}
+				></Route>
+			</Routes>
+			{/* <Routes>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="admin-login" element={<AdminLogin />} />
       </Routes> */}
-    </>
-  );
+		</>
+	);
 }
 
 export default App;
