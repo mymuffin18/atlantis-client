@@ -7,14 +7,17 @@ import { BrowserRouter } from 'react-router-dom';
 import AdminAuthContextProvider from './context/AdminAuthContextProvider';
 import UserAuthContextProvider from './context/UserAuthContextProvider';
 import EarthquakeContextProvider from './context/EarthquakeContextProvider';
+import DisasterReportContextProvider from './context/DisasterReportContextProvider';
 
 ReactDOM.render(
 	<AdminAuthContextProvider>
 		<UserAuthContextProvider>
 			<EarthquakeContextProvider>
-				<BrowserRouter>
-					<App />
-				</BrowserRouter>
+				<DisasterReportContextProvider>
+					<BrowserRouter>
+						<App />
+					</BrowserRouter>
+				</DisasterReportContextProvider>
 			</EarthquakeContextProvider>
 		</UserAuthContextProvider>
 	</AdminAuthContextProvider>,

@@ -10,6 +10,7 @@ import UserList from './components/dashboardAdmin/UserList';
 import ApproveDisaster from './components/dashboardAdmin/ApproveDisaster';
 import DashboardUser from './components/dashboardUser/DashboardUser';
 import LandingPage from './components/LandingPage';
+import UserRoutes from './routes/UserRoutes';
 
 function App() {
 	const admin = useAdminAuth();
@@ -71,7 +72,11 @@ function App() {
 
 				<Route
 					path='user/dashboard'
-					element={<DashboardUser />}
+					element={
+						<UserRoutes>
+							<DashboardUser />
+						</UserRoutes>
+					}
 				></Route>
 			</Routes>
 			{/* <Routes>

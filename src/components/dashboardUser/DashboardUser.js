@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { logoutUser } from '../../api/atlantis-api';
+import {
+	getApprovedReports,
+	getUnapprovedReports,
+} from '../../api/disaster_reports';
 import { getEarthquakes } from '../../api/earthquake';
+import { useDisasterReports } from '../../context/DisasterReportContextProvider';
 import { useEarthquakes } from '../../context/EarthquakeContextProvider';
 import { useUserAuth } from '../../context/UserAuthContextProvider';
 import Header from './Header';
@@ -10,40 +15,94 @@ function DashboardUser() {
 	const user = useUserAuth();
 	const { dispatch: dispatchEarthquake } = useEarthquakes();
 	const [loading, setLoading] = useState(false);
-	const handleLogout = async () => {
-		await logoutUser(user.state.token);
+	const { dispatch: disasterReportDispatch } = useDisasterReports();
 
-		user.dispatch({ type: 'LOGOUT' });
-	};
-
+	const [earthquakeCheck, setEarthquakeCheck] = useState(false);
+	const [pendingReportsCheck, setPendingReportsCheck] = useState(true);
 	useEffect(() => {
 		(async () => {
 			setLoading(true);
 			const { data, status } = await getEarthquakes(user.state.token);
-			if (status === '401') {
+			if (status === 401) {
+				setLoading(false);
 				user.dispatch({ type: 'LOGOUT' });
 			}
 			dispatchEarthquake({ type: 'GET_EARTHQUAKES', payload: data });
-
+			await getAllApprovedDisasters();
+			await getAllPendingDisasters();
 			setLoading(false);
 		})();
-	}, []);
+	}, [user.state.token]);
+
+	const getAllApprovedDisasters = async () => {
+		setLoading(true);
+		const { data, status } = await getApprovedReports(user.state.token);
+		if (status === 401) {
+			setLoading(false);
+			user.dispatch({ type: 'LOGOUT' });
+		}
+		disasterReportDispatch({
+			type: 'GET_APPROVED_DISASTERS',
+			payload: data,
+		});
+		setLoading(false);
+	};
+
+	const getAllPendingDisasters = async () => {
+		setLoading(true);
+		const { data, status } = await getUnapprovedReports(user.state.token);
+		if (status === 401) {
+			setLoading(false);
+			user.dispatch({ type: 'LOGOUT' });
+		}
+		console.log('unapproved', data);
+		disasterReportDispatch({
+			type: 'GET_UNAPPROVED_DISASTERS',
+			payload: data,
+		});
+		setLoading(false);
+	};
 	return (
 		<div className='h-screen'>
-			{/* <div>Dashboard User</div>
-			<div>
-				<button onClick={handleLogout}>Logout</button>
-			</div> */}
 			<Header />
 
 			<section>
-				{loading && (
+				{loading ? (
 					<div className='flex justify-center'>
 						<span className=''>Loading...</span>
 					</div>
+				) : (
+					<div className='flex justify-center'>
+						<div>
+							<input
+								type='checkbox'
+								name='Earthquakes'
+								value='earthquake data'
+								checked={earthquakeCheck}
+								onChange={() =>
+									setEarthquakeCheck((t) => !t)
+								}
+							/>{' '}
+							Earthquakes
+						</div>
+						<div>
+							<input
+								type='checkbox'
+								name='pending data'
+								checked={pendingReportsCheck}
+								onChange={() =>
+									setPendingReportsCheck((t) => !t)
+								}
+							/>{' '}
+							Pending Reports
+						</div>
+					</div>
 				)}
 				<div className='h-full w-full'>
-					<Map />
+					<Map
+						earthquakeCheck={earthquakeCheck}
+						pendingReportsCheck={pendingReportsCheck}
+					/>
 				</div>
 			</section>
 		</div>

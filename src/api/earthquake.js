@@ -16,3 +16,19 @@ export const getEarthquakes = async (token) => {
 
 	return { data, status };
 };
+
+export const earthquakeDetail = async (id) => {
+	let data = {};
+
+	try {
+		console.log('sending id', id);
+		const res = await axios.get(
+			`https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=${id}&format=geojson`
+		);
+		data = res.data;
+	} catch (e) {
+		console.log('earthquake detail error: ', e.response);
+	}
+
+	return data;
+};
