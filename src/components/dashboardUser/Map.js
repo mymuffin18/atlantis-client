@@ -10,8 +10,13 @@ import DisasterForm from './DisasterForm';
 import EarthquakeData from './EarthquakeData';
 import { useDisasterReports } from '../../context/DisasterReportContextProvider';
 import CustomPin from './CustomPin';
+import DisasterReport from './DisasterReport';
 
-const Map = ({ earthquakeCheck, pendingReportsCheck }) => {
+const Map = ({
+	earthquakeCheck,
+	pendingReportsCheck,
+	approvedReportsCheck,
+}) => {
 	const location = useLocation();
 	const { state: earthquakeContext } = useEarthquakes();
 	const { state: disasterReports } = useDisasterReports();
@@ -25,9 +30,10 @@ const Map = ({ earthquakeCheck, pendingReportsCheck }) => {
 	const [status, setStatus] = useState('');
 	const [popupPosition, setPopupPosition] = useState(null);
 	const [userPosition, setUserPosition] = useState({});
-
+	const [disasterPopup, setDisasterPopup] = useState({});
 	const [showEarthquakes, setShowEarthquakes] = useState({});
 
+	console.log(disasterReports.approvedDisasters);
 	useEffect(() => {
 		if (location) {
 			setViewState((vp) => ({
@@ -132,6 +138,7 @@ const Map = ({ earthquakeCheck, pendingReportsCheck }) => {
 						latitude={disaster.latitude}
 						anchor='center'
 						key={disaster.id}
+						onClick={() => setDisasterPopup(disaster)}
 					>
 						<CustomPin
 							avatar={disaster.disaster.avatar}
@@ -147,9 +154,40 @@ const Map = ({ earthquakeCheck, pendingReportsCheck }) => {
 					closeOnClick={false}
 					onClose={() => setShowEarthquakes({})}
 				>
-					<EarthquakeData id={showEarthquakes.id} />
+					<Card>
+						<EarthquakeData id={showEarthquakes.id} />
+					</Card>
 				</Popup>
 			)}
+
+			{!_.isEmpty(disasterPopup) && (
+				<Popup
+					longitude={disasterPopup.longitude}
+					latitude={disasterPopup.latitude}
+					anchor='left'
+					closeOnClick={false}
+					onClose={() => setDisasterPopup({})}
+				>
+					<DisasterReport data={disasterPopup} />
+				</Popup>
+			)}
+
+			{approvedReportsCheck &&
+				disasterReports.approvedDisasters &&
+				disasterReports.approvedDisasters.map((disaster) => (
+					<Marker
+						longitude={disaster.longitude}
+						latitude={disaster.latitude}
+						anchor='center'
+						key={disaster.id}
+						onClick={() => setDisasterPopup(disaster)}
+					>
+						<CustomPin
+							avatar={disaster.disaster.avatar}
+							viewState={viewState}
+						/>
+					</Marker>
+				))}
 
 			{popupPosition && (
 				<Popup

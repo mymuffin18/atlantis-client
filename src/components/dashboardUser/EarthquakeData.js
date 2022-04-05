@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { earthquakeDetail } from '../../api/earthquake';
 
 const EarthquakeData = ({ id }) => {
@@ -19,7 +19,7 @@ const EarthquakeData = ({ id }) => {
 
 	const convertTime = (time) => {
 		const date = new Date(time);
-		return `${date.toUTCString()}`;
+		return `${date.toLocaleString()}`;
 	};
 
 	return (
