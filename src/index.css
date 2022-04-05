@@ -3,58 +3,73 @@
 @tailwind utilities;
 
 .centerText {
-	text-align: center;
+  text-align: center;
 }
 
 .verticalCenter {
-	flex: 1;
-	justify-content: center;
-	line-height: 100px;
+  flex: 1;
+  justify-content: center;
+  line-height: 100px;
 }
 
 .map1 {
-	height: 480.5px;
-	width: 100%;
-	object-fit: cover;
+  height: 480.5px;
+  width: 100%;
+  object-fit: cover;
 }
 .map1sm {
-	height: 100px;
-	width: 100%;
-	object-fit: cover;
+  height: 100px;
+  width: 100%;
+  object-fit: cover;
 }
 
 .map2 {
-	height: 70%;
-	width: 70%;
-	object-fit: cover;
+  height: 70%;
+  width: 70%;
+  object-fit: cover;
 }
 
 .height {
-	height: 100%;
+  height: 100%;
 }
 
 .widthko {
-	width: 100vw;
+  width: 100vw;
 }
 
 @layer components {
-	.btn {
-		@apply px-4 py-2 rounded-3xl cursor-pointer transition-all font-bold;
-	}
+  .btn {
+    @apply px-4 py-2 rounded-3xl cursor-pointer transition-all font-bold;
+  }
 
-	.btn-primary {
-		@apply border-4 border-white text-white hover:bg-white hover:text-black;
-	}
+  .btn-primary {
+    @apply border-4 border-white text-white hover:bg-white hover:text-black;
+  }
 
-	.popup-button {
-		@apply px-4 py-2 hover:bg-blue-300 transition-all;
-	}
+  .popup-button {
+    @apply px-4 py-2 hover:bg-blue-300 transition-all;
+  }
 
-	.button {
-		@apply px-4 py-2 cursor-pointer rounded-md transition-all;
-	}
+  .button {
+    @apply px-4 py-2 cursor-pointer rounded-md transition-all;
+  }
 
-	.button-blue {
-		@apply bg-blue-600 text-white hover:bg-blue-300;
-	}
+  .button-blue {
+    @apply bg-blue-600 text-white hover:bg-blue-300;
+  }
+}
+
+@layer base {
+  h1 {
+    @apply text-5xl text-black;
+  }
+  h2 {
+    @apply text-xl text-white px-5;
+  }
+  button {
+    @apply rounded-lg px-3 py-1;
+  }
+  tbody {
+    @apply text-center;
+  }
 }

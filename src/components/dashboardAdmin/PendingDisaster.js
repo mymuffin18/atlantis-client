@@ -1,30 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { ApproveDis, ApproveDisapprove } from '../../api/atlantis-api';
 import { useAdminAuth } from '../../context/AdminAuthContextProvider';
+import {
+  ApproveDisapprove,
+  DeletePending,
+  PendingDisasters,
+} from '../../api/atlantis-api';
 
-function ApproveDisaster() {
+function PendingDisaster() {
+  const [pendingDisasters, setPendingDisasters] = useState([]);
   const { state } = useAdminAuth();
-  const [approvedDisasters, setApprovedDisasters] = useState([]);
-  const [disapprovedDisaster, setDisapprovedDisaster] = useState('');
+  const [approve, setApprove] = useState('');
+  const [deletePending, setDeletePending] = useState('');
 
   useEffect(() => {
     (async () => {
-      const data = await ApproveDis(state.token);
-      setApprovedDisasters(data.data);
-      console.log(approvedDisasters);
+      const data = await PendingDisasters(state.token);
+      setPendingDisasters(data.data);
+      console.log(pendingDisasters);
     })();
   }, []);
 
-  const handleDisapprove = async (id) => {
+  const handleApprove = async (id) => {
     const data = await ApproveDisapprove(id, state.token);
-    setDisapprovedDisaster(data);
+    setApprove(data);
     console.log(data);
   };
 
+  const handleDelete = async (id) => {
+    const data = await DeletePending(id, state.token);
+    setDeletePending(data);
+    console.log(data);
+  };
   return (
     <div>
       <div className='mb-10 mt-5'>
-        <h1>Approved Disaster Reports</h1>
+        <h1>Pending Disaster Reports</h1>
       </div>
       <table class='table-auto w-full'>
         <thead>
@@ -39,23 +49,23 @@ function ApproveDisaster() {
           </tr>
         </thead>
         <tbody>
-          {approvedDisasters.length > 0 &&
-            approvedDisasters.map((disaster) => (
+          {pendingDisasters.length > 0 &&
+            pendingDisasters.map((disaster) => (
               <tr key={disaster.id}>
-                <td>{disaster.disaster.disaster_type}</td>{' '}
+                <td>{disaster.disaster.disaster_type}</td>
                 <td>{disaster.disaster_level}</td>
-                <td>{disaster.latitude}</td> <td>{disaster.longitude}</td>{' '}
+                <td>{disaster.latitude}</td> <td>{disaster.longitude}</td>
                 <td>{new Date(disaster.date_occured).toLocaleString()}</td>
                 <td>{disaster.user.fullname}</td>
                 <td className='flex justify-center gap-2'>
                   <button
-                    onClick={() => handleDisapprove(disaster.id)}
+                    onClick={() => handleApprove(disaster.id)}
                     className='bg-green-500'
                   >
-                    disapprove
+                    approve
                   </button>
                   <button
-                    // onClick={() => handleDelete(disaster.id)}
+                    onClick={() => handleDelete(disaster.id)}
                     className='bg-red-500'
                   >
                     delete
@@ -69,4 +79,4 @@ function ApproveDisaster() {
   );
 }
 
-export default ApproveDisaster;
+export default PendingDisaster;
