@@ -12,7 +12,7 @@ export const addReport = async (data, token) => {
 			{
 				headers: {
 					authorization: token,
-					// 'Content-Type': 'multipart/form-data',
+					'content-type': 'multipart/form-data',
 				},
 			}
 		);
@@ -77,5 +77,24 @@ export const getDisasterTypes = async (token) => {
 		console.log(e.response);
 		status = e.response.status;
 	}
+	return { data, status };
+};
+
+export const voteReport = async (id, token) => {
+	let data = {};
+	let status;
+	try {
+		const res = await axios.put(
+			`${API_URL}/api/v1/disaster_reports/${id}/vote`,
+			{},
+			{ headers: { authorization: token } }
+		);
+
+		data = res.data;
+	} catch (e) {
+		console.log(e.response);
+		status = e.response.status;
+	}
+
 	return { data, status };
 };

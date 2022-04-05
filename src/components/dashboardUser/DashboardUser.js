@@ -18,7 +18,8 @@ function DashboardUser() {
 	const { dispatch: disasterReportDispatch } = useDisasterReports();
 
 	const [earthquakeCheck, setEarthquakeCheck] = useState(false);
-	const [pendingReportsCheck, setPendingReportsCheck] = useState(true);
+	const [pendingReportsCheck, setPendingReportsCheck] = useState(false);
+	const [approvedReportsCheck, setApprovedReportsCheck] = useState(true);
 	useEffect(() => {
 		(async () => {
 			setLoading(true);
@@ -28,8 +29,8 @@ function DashboardUser() {
 				user.dispatch({ type: 'LOGOUT' });
 			}
 			dispatchEarthquake({ type: 'GET_EARTHQUAKES', payload: data });
-			await getAllApprovedDisasters();
 			await getAllPendingDisasters();
+			await getAllApprovedDisasters();
 			setLoading(false);
 		})();
 	}, [user.state.token]);
@@ -68,11 +69,11 @@ function DashboardUser() {
 
 			<section>
 				{loading ? (
-					<div className='flex justify-center'>
+					<div className='flex justify-center '>
 						<span className=''>Loading...</span>
 					</div>
 				) : (
-					<div className='flex justify-center'>
+					<div className='flex justify-center gap-2'>
 						<div>
 							<input
 								type='checkbox'
@@ -96,12 +97,24 @@ function DashboardUser() {
 							/>{' '}
 							Pending Reports
 						</div>
+						<div>
+							<input
+								type='checkbox'
+								name='approved data'
+								checked={approvedReportsCheck}
+								onChange={() =>
+									setApprovedReportsCheck((t) => !t)
+								}
+							/>
+							Reported disasters
+						</div>
 					</div>
 				)}
 				<div className='h-full w-full'>
 					<Map
 						earthquakeCheck={earthquakeCheck}
 						pendingReportsCheck={pendingReportsCheck}
+						approvedReportsCheck={approvedReportsCheck}
 					/>
 				</div>
 			</section>
