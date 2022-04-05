@@ -38,7 +38,9 @@ const DisasterForm = ({ latitude, longitude, onClose }) => {
 	const handleSubmit = async () => {
 		setLoading(true);
 		let fd = new FormData();
-		fd.append('images', images);
+		if (images !== undefined) {
+			fd.append('images', images);
+		}
 		fd.append('disaster_level', disasterLevel);
 		fd.append('disaster_id', disasterId);
 		fd.append('longitude', longitude);
@@ -132,6 +134,14 @@ const DisasterForm = ({ latitude, longitude, onClose }) => {
 					className='border-2 p-2'
 					onChange={(e) => setDescription(e.target.value)}
 				/>
+				{descriptionErrors &&
+					descriptionErrors.map((err, index) => (
+						<div className='block' key={index}>
+							<span className='text-xs text-red-500'>
+								description {err}
+							</span>
+						</div>
+					))}
 			</div>
 			<div className='flex flex-col'>
 				<label htmlFor='date'>Date</label>
@@ -142,6 +152,14 @@ const DisasterForm = ({ latitude, longitude, onClose }) => {
 					onChange={(e) => setDateTime(e.target.value)}
 					className='p-2 block border'
 				/>
+				{datetimeErrors &&
+					datetimeErrors.map((err, index) => (
+						<div className='block' key={index}>
+							<span className='text-xs text-red-500'>
+								Date {err}
+							</span>
+						</div>
+					))}
 			</div>
 			<div>
 				<label htmlFor='images'>Images</label>
@@ -162,6 +180,14 @@ const DisasterForm = ({ latitude, longitude, onClose }) => {
 					<option value='not-bad'>Good</option>
 					<option value='danger'>Danger</option>
 				</select>
+				{disasterLevelErrors &&
+					disasterLevelErrors.map((err, index) => (
+						<div className='block' key={index}>
+							<span className='text-xs text-red-500'>
+								{err}
+							</span>
+						</div>
+					))}
 			</div>
 			<div className='flex justify-center'>
 				{loading ? (
