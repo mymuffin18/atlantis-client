@@ -8,17 +8,17 @@ const reducer = (state, action) => {
 	switch (action.type) {
 		case 'GET_UNAPPROVED_DISASTERS':
 			return {
-				...state.approvedDisasters,
+				...state,
 				unapprovedDisasters: action.payload,
 			};
 		case 'GET_APPROVED_DISASTERS':
 			return {
-				...state.unapprovedDisasters,
+				...state,
 				approvedDisasters: action.payload,
 			};
 		case 'CREATE_DISASTER':
 			return {
-				...state.approvedDisaster,
+				...state,
 				unapprovedDisasters: [
 					...state.unapprovedDisasters,
 					action.payload,
@@ -28,7 +28,7 @@ const reducer = (state, action) => {
 		case 'EDIT_DISASTER':
 			if (action.payload.data.approved) {
 				return {
-					...state.unapprovedDisasters,
+					...state,
 					approvedDisaster: state.approvedDisaster.map(
 						(disaster) => {
 							if (disaster.id === action.payload.id) {
@@ -40,7 +40,7 @@ const reducer = (state, action) => {
 				};
 			} else {
 				return {
-					...state.approvedDisasters,
+					...state,
 					unapprovedDisasters: state.unapprovedDisasters.map(
 						(disaster) => {
 							if (disaster.id === action.payload.id) {
@@ -55,14 +55,14 @@ const reducer = (state, action) => {
 		case 'DELETE_DISASTER':
 			if (action.payload.data.approved) {
 				return {
-					...state.unapprovedDisasters,
+					...state,
 					approvedDisasters: state.approvedDisasters.filter(
 						(disaster) => disaster.id !== action.payload.id
 					),
 				};
 			} else {
 				return {
-					...state.approvedDisasters,
+					...state,
 					unapprovedDisasters: state.unapprovedDisasters.filter(
 						(disaster) => disaster.id !== action.payload.id
 					),

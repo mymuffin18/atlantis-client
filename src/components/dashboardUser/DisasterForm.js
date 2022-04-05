@@ -36,21 +36,30 @@ const DisasterForm = ({ latitude, longitude, onClose }) => {
 	}, []);
 
 	const handleSubmit = async () => {
-		console.log('working');
-		console.log('latitude', latitude);
-		console.log('longitude', longitude);
 		setLoading(true);
+		let fd = new FormData();
+		fd.append('images', images);
+		fd.append('disaster_level', disasterLevel);
+		fd.append('disaster_id', disasterId);
+		fd.append('longitude', longitude);
+		fd.append('latitude', latitude);
+		fd.append('description', description);
+		fd.append('date_occured', datetime);
+
 		const { return_data, status, errors } = await addReport(
-			{
-				disaster_id: disasterId,
-				description: description,
-				date_occured: datetime,
-				disaster_level: disasterLevel,
-				latitude,
-				longitude,
-			},
+			fd,
 			userState.token
 		);
+
+		// {
+		// 	disaster_id: disasterId,
+		// 	description: description,
+		// 	date_occured: datetime,
+		// 	images: images,
+		// 	disaster_level: disasterLevel,
+		// 	latitude,
+		// 	longitude,
+		// },
 
 		if (status === 401) {
 			setLoading(false);
@@ -72,13 +81,21 @@ const DisasterForm = ({ latitude, longitude, onClose }) => {
 			onClose();
 		}
 	};
+
+	// const onSubmit = async (e) => {
+	// 	e.preventDefault();
+
+	// 	let fd = new FormData();
+
+	// 	console.log(fd.getAll);
+	// };
 	return (
 		<div className='flex flex-col gap-2'>
 			<div className='text-lg text-center'>Report a disaster</div>
 			<div className=''>
 				<label htmlFor='disaster'>Disaster:</label>
 				<select
-					name=''
+					name='disaster_id'
 					value={disasterId}
 					onChange={(e) => setDisasterId(e.target.value)}
 					id=''
@@ -110,6 +127,7 @@ const DisasterForm = ({ latitude, longitude, onClose }) => {
 				<label htmlFor='desciption'>Description</label>
 				<input
 					type='text'
+					name='description'
 					value={description}
 					className='border-2 p-2'
 					onChange={(e) => setDescription(e.target.value)}
@@ -120,19 +138,19 @@ const DisasterForm = ({ latitude, longitude, onClose }) => {
 				<input
 					type='datetime-local'
 					value={datetime}
+					name='date_occured'
 					onChange={(e) => setDateTime(e.target.value)}
 					className='p-2 block border'
 				/>
 			</div>
-			{/* <div>
+			<div>
 				<label htmlFor='images'>Images</label>
 				<input
 					type='file'
-					onChange={(e) =>
-						setImages(URL.createObjectURL(e.target.files[0]))
-					}
+					multiple
+					onChange={(e) => setImages(e.target.files[0])}
 				/>
-			</div> */}
+			</div>
 			<div>
 				<label htmlFor='disaster-level'>Disaster level: </label>
 				<select
@@ -140,8 +158,8 @@ const DisasterForm = ({ latitude, longitude, onClose }) => {
 					value={disasterLevel}
 					onChange={(e) => setDisasterLevel(e.target.value)}
 				>
-					<option value='good'>Good</option>
-					<option value='moderate'>Moderate</option>
+					<option value='weak'>Weak</option>
+					<option value='not-bad'>Good</option>
 					<option value='danger'>Danger</option>
 				</select>
 			</div>
