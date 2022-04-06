@@ -45,6 +45,7 @@ function PendingDisaster() {
             <th>longitude</th>
             <th>date</th>
             <th>reported by</th>
+            <th>number of votes</th>
             <th>actions</th>
           </tr>
         </thead>
@@ -57,6 +58,7 @@ function PendingDisaster() {
                 <td>{disaster.latitude}</td> <td>{disaster.longitude}</td>
                 <td>{new Date(disaster.date_occured).toLocaleString()}</td>
                 <td>{disaster.user.fullname}</td>
+                <td>{disaster.votes}</td>
                 <td className='flex justify-center gap-2'>
                   <button
                     onClick={() => handleApprove(disaster.id)}
