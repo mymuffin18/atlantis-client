@@ -13,23 +13,23 @@ function Sidebar() {
   return (
     <div className='h-screen bg-black text-white text-center'>
       <div className='mb-10 mt-5'>
-        <h1 className='text-white underline'>Sidebar</h1>
+        <h1 className='text-white underline'>ATLANTIS</h1>
       </div>
-      <div className='py-10 hover:bg-slate-600'>
-        <Link to='userlist'>
+      <Link to='userlist'>
+        <div className='py-10 hover:bg-slate-600'>
           <h2>User's List</h2>
-        </Link>
-      </div>
-      <div className='py-10 hover:bg-slate-600'>
-        <Link to='approved-disaster'>
+        </div>
+      </Link>
+      <Link to='approved-disaster'>
+        <div className='py-10 hover:bg-slate-600'>
           <h2>Approved Disaster reports</h2>
-        </Link>
-      </div>
-      <div className='py-10 hover:bg-slate-600'>
-        <Link to='pending-disaster'>
+        </div>
+      </Link>
+      <Link to='pending-disaster'>
+        <div className='py-10 hover:bg-slate-600'>
           <h2>Pending Disaster reports</h2>
-        </Link>
-      </div>
+        </div>
+      </Link>
       <div className='absolute bottom-2 left-5'>
         <button className='bg-slate-700' onClick={handleLogout}>
           Logout
