@@ -35,7 +35,7 @@ function Login() {
         </div>
       </div>
       <div className='w-screen h-11/12 flex justify-center items-center'>
-        <div className='w-full lg:w-1/4 h-5/6 lg:h-1/2 flex justify-center lg:border-8 border-slate-400 rounded-3xl'>
+        <div className='w-full lg:w-1/4 h-fit flex justify-center lg:border-8 border-slate-400 rounded-3xl'>
           <div className='w-3/4'>
             <div className='mb-10 mt-5'>
               <h1 className='text-black'>Login</h1>
@@ -70,7 +70,7 @@ function Login() {
                 Login
               </button>
             </div>
-            <div className='flex justify-center text-slate-400'>
+            <div className='flex justify-center text-slate-400 mb-10'>
               <Link className='text-blue-600 italic mr-2' to='/register'>
                 <span className='whitespace-nowrap'>Register </span>
               </Link>{' '}
