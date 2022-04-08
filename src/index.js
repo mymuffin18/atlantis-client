@@ -8,15 +8,18 @@ import AdminAuthContextProvider from './context/AdminAuthContextProvider';
 import UserAuthContextProvider from './context/UserAuthContextProvider';
 import EarthquakeContextProvider from './context/EarthquakeContextProvider';
 import DisasterReportContextProvider from './context/DisasterReportContextProvider';
+import PopupContextProvider from './context/PopupContextProvider';
 
 ReactDOM.render(
 	<AdminAuthContextProvider>
 		<UserAuthContextProvider>
 			<EarthquakeContextProvider>
 				<DisasterReportContextProvider>
-					<BrowserRouter>
-						<App />
-					</BrowserRouter>
+					<PopupContextProvider>
+						<BrowserRouter>
+							<App />
+						</BrowserRouter>
+					</PopupContextProvider>
 				</DisasterReportContextProvider>
 			</EarthquakeContextProvider>
 		</UserAuthContextProvider>

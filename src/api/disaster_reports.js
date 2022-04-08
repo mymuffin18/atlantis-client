@@ -120,3 +120,18 @@ export const voteReport = async (id, token) => {
 
 	return { data, status };
 };
+
+export const deleteReport = async (id, token) => {
+	let status;
+	try {
+		const res = await axios.delete(
+			`${API_URL}/api/v1/disaster_reports/${id}`,
+			{ headers: { authorization: token } }
+		);
+		status = res.status;
+	} catch (e) {
+		status = e.response.status;
+	}
+
+	return status;
+};
