@@ -1,6 +1,12 @@
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import ReactMapGL, {
+	Marker,
+	Popup,
+	NavigationControl,
+	FullscreenControl,
+	GeolocateControl,
+} from 'react-map-gl';
 import useLocation from '../hooks/useLocation';
 import pin from '../../images/pin.png';
 
@@ -78,11 +84,15 @@ const Map = ({
 			mapboxAccessToken='pk.eyJ1IjoibXltdWZmaW4yMCIsImEiOiJjbDFmZjl2NGQwNDg3M2ttajkycGN0cmI0In0.leihkx6W4v53tMPRMy-FBw'
 			onDblClick={(e) => getPopUpPosition(e)}
 		>
+			<NavigationControl />
+			<GeolocateControl />
+			<FullscreenControl />
+
 			{!_.isEmpty(userPosition) && (
 				<Marker
 					latitude={userPosition.latitude}
 					longitude={userPosition.longitude}
-					anchor='center'
+					anchor='bottom'
 					onClick={(e) => setShowCurrentLocationPopup(true)}
 				>
 					<img
@@ -115,7 +125,7 @@ const Map = ({
 					<Marker
 						longitude={earthquake.latitude}
 						latitude={earthquake.longitude}
-						anchor='center'
+						anchor='bottom'
 						key={earthquake.id}
 						onClick={() => setShowEarthquakes(earthquake)}
 					>
@@ -136,7 +146,7 @@ const Map = ({
 					<Marker
 						longitude={disaster.longitude}
 						latitude={disaster.latitude}
-						anchor='center'
+						anchor='bottom'
 						key={disaster.id}
 						onClick={() => setDisasterPopup(disaster)}
 					>
@@ -178,7 +188,7 @@ const Map = ({
 					<Marker
 						longitude={disaster.longitude}
 						latitude={disaster.latitude}
-						anchor='center'
+						anchor='bottom'
 						key={disaster.id}
 						onClick={() => setDisasterPopup(disaster)}
 					>
