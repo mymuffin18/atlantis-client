@@ -13,6 +13,7 @@ import LandingPage from './components/LandingPage';
 import UserRoutes from './routes/UserRoutes';
 import PendingDisaster from './components/dashboardAdmin/PendingDisaster';
 import AdminRoutes from './routes/AdminRoutes';
+import Notification from './components/dashboardUser/Notification';
 
 function App() {
   const admin = useAdminAuth();
@@ -76,6 +77,7 @@ function App() {
             </UserRoutes>
           }
         ></Route>
+        <Route path='/notification' element={<Notification />} />
       </Routes>
       {/* <Routes>
         <Route path="login" element={<Login />} />

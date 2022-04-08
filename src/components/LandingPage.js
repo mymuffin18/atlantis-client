@@ -12,12 +12,12 @@ function LandingPage() {
         </div>
         <div className='w-1/6 lg:w-1/5 flex flex-row justify-end lg:mr-12'>
           <Link to='/register'>
-            <button className=' bg-white rounded-full text-black px-2 md:px-5 py-0.5 mx-1 lg:mx-5 font-semibold'>
+            <button className='rounded-full text-white px-2 md:px-5 py-0.5 mx-1 lg:mx-5 font-semibold hover:bg-white hover:text-black'>
               <span className='whitespace-nowrap'>Sign Up</span>
             </button>{' '}
           </Link>
           <Link to='/user'>
-            <button className='bg-white rounded-full text-black px-2 md:px-5 py-0.5 mx-1 lg:mx-5 sm:mr-24 lg:mr-0 font-semibold'>
+            <button className='rounded-full text-white px-2 md:px-5 py-0.5 mx-1 lg:mx-5 sm:mr-24 lg:mr-0 font-semibold hover:bg-white hover:text-black'>
               Login
             </button>
           </Link>
