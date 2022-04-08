@@ -10,6 +10,7 @@ import { useEarthquakes } from '../../context/EarthquakeContextProvider';
 import { useUserAuth } from '../../context/UserAuthContextProvider';
 import Header from './Header';
 import Map from './Map';
+import { Link } from 'react-router-dom';
 
 function DashboardUser() {
   const user = useUserAuth();
@@ -76,11 +77,13 @@ function DashboardUser() {
     <div className='h-screen'>
       {/* <Header /> */}
       <div className='w-full bg-black flex flex-row items-center h-1/12'>
-        <div className=' text-white text-4xl lg:text-5xl w-2/3 lg:w-4/5 md:ml-12 xs:ml-2 bg-blue-300'>
+        <div className=' text-white text-4xl lg:text-5xl w-2/3 lg:w-4/5 md:ml-12 xs:ml-2'>
           ATLANTIS
         </div>
-        <div className=' w-1/3 flex justify-end gap-2 bg-green-400'>
-          <button className='btn btn-primary'>notif</button>
+        <div className=' w-1/3 flex justify-end gap-2'>
+          <Link to='/notification'>
+            <button className='btn btn-primary'>notif</button>
+          </Link>
 
           <button
             onClick={handleLogout}

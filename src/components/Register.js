@@ -62,7 +62,7 @@ function Register() {
         </div>
       </div>
       <div className='w-screen h-11/12 flex justify-center items-center'>
-        <div className='w-full lg:w-1/4 h-5/6 lg:h-3/4 flex justify-center lg:border-8 border-slate-400 rounded-3xl'>
+        <div className='w-full lg:w-1/4 h-fit flex justify-center lg:border-8 border-slate-400 rounded-3xl'>
           <div className='w-3/4'>
             <div className='text-5xl mb-10 mt-5'>
               <h1 className='text-black'>Sign up</h1>
@@ -153,7 +153,7 @@ function Register() {
                   Sign Up!
                 </button>
               </div>
-              <div className='w-full'>
+              <div className='w-full mb-10'>
                 <div className='flex justify-end'>
                   <Link className='text-blue-600 italic' to='/'>
                     back
