@@ -17,6 +17,7 @@ import EarthquakeData from './EarthquakeData';
 import { useDisasterReports } from '../../context/DisasterReportContextProvider';
 import CustomPin from './CustomPin';
 import DisasterReport from './DisasterReport';
+import { usePopup } from '../../context/PopupContextProvider';
 
 const Map = ({
 	earthquakeCheck,
@@ -38,10 +39,16 @@ const Map = ({
 	const [userPosition, setUserPosition] = useState({});
 	const [disasterPopup, setDisasterPopup] = useState({});
 	const [showEarthquakes, setShowEarthquakes] = useState({});
-
+	const { state: popupState } = usePopup();
 	console.log(disasterReports.approvedDisasters);
 	useEffect(() => {
-		if (location) {
+		if (popupState.longitude !== null) {
+			setViewState((vp) => ({
+				...vp,
+				...popupState,
+				zoom: 10,
+			}));
+		} else if (location) {
 			setViewState((vp) => ({
 				...vp,
 				...location,
@@ -50,7 +57,7 @@ const Map = ({
 
 			setUserPosition(location);
 		}
-	}, [location, setViewState]);
+	}, [location, setViewState, popupState]);
 
 	const getPopUpPosition = (event) => {
 		const { lat: latitude, lng: longitude } = event.lngLat;
@@ -112,7 +119,7 @@ const Map = ({
 					longitude={userPosition.longitude}
 					latitude={userPosition.latitude}
 					anchor='left'
-					closeOnClick={false}
+					closeOnClick={true}
 					onClose={hideCurrentLocation}
 				>
 					<Card>Your current location.</Card>
@@ -178,7 +185,10 @@ const Map = ({
 					closeOnClick={false}
 					onClose={() => setDisasterPopup({})}
 				>
-					<DisasterReport data={disasterPopup} />
+					<DisasterReport
+						data={disasterPopup}
+						setDisasterPopup={setDisasterPopup}
+					/>
 				</Popup>
 			)}
 

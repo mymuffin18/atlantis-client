@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { voteReport } from '../../api/disaster_reports';
+import { deleteReport, voteReport } from '../../api/disaster_reports';
 import { useDisasterReports } from '../../context/DisasterReportContextProvider';
 import { useUserAuth } from '../../context/UserAuthContextProvider';
-
-const DisasterReport = ({ data: reportData = {} }) => {
+const DisasterReport = ({ data: reportData = {}, setDisasterPopup }) => {
 	const { state: userState, dispatch: userDispatch } = useUserAuth();
 	const { state: disasterState, dispatch: disasterDispatch } =
 		useDisasterReports();
@@ -28,7 +27,28 @@ const DisasterReport = ({ data: reportData = {} }) => {
 		setData(return_data);
 		setLoading(false);
 	};
-	console.log(data);
+
+	const handleDelete = async () => {
+		setLoading(true);
+		const status = await deleteReport(data.id, userState.token);
+
+		if (status === 401) {
+			alert('Please log in your account.');
+			setLoading(false);
+			userDispatch({ type: 'LOGOUT' });
+		} else if (status === 204) {
+			alert('Report deleted!');
+			disasterDispatch({
+				type: 'DELETE_DISASTER',
+				payload: {
+					data: data,
+					id: data.id,
+				},
+			});
+			setLoading(false);
+			setDisasterPopup({});
+		}
+	};
 	return (
 		<div className='flex flex-col w-60 gap-2'>
 			<div className='w-full flex gap-2 items-end'>
@@ -73,6 +93,17 @@ const DisasterReport = ({ data: reportData = {} }) => {
 					>
 						{data.voted ? 'Unlike' : 'Like'}
 					</button>
+				</div>
+			)}
+			{data.user.id === userState.user.id && (
+				<div>
+					<div
+						className='popup-button button-red rounded-lg block text-center cursor-pointer'
+						onClick={handleDelete}
+						disabled={loading}
+					>
+						Delete
+					</div>
 				</div>
 			)}
 		</div>
