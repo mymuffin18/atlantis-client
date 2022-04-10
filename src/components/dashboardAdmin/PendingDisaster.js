@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAdminAuth } from '../../context/AdminAuthContextProvider';
 import {
+  AddWarning,
   ApproveDisapprove,
   DeletePending,
   PendingDisasters,
@@ -11,6 +12,7 @@ function PendingDisaster() {
   const { state } = useAdminAuth();
   const [approve, setApprove] = useState('');
   const [deletePending, setDeletePending] = useState('');
+  const [double, setDouble] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -31,6 +33,11 @@ function PendingDisaster() {
     setDeletePending(data);
     console.log(data);
   };
+
+  const handleAddWarning = async (id) => {
+    await AddWarning(id, state.token);
+  };
+
   return (
     <div>
       <div className='mb-10 mt-5'>
@@ -39,14 +46,14 @@ function PendingDisaster() {
       <table class='table-auto w-full'>
         <thead>
           <tr className='text-center'>
-            <th>type</th>
-            <th>level</th>
-            <th>latitude</th>
-            <th>longitude</th>
-            <th>date</th>
-            <th>reported by</th>
-            <th>number of votes</th>
-            <th>actions</th>
+            <th>Type</th>
+            <th>Level</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Date</th>
+            <th>Reported by</th>
+            <th>Number of Votes</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -62,15 +69,23 @@ function PendingDisaster() {
                 <td className='flex justify-center gap-2'>
                   <button
                     onClick={() => handleApprove(disaster.id)}
-                    className='bg-green-500'
+                    className='bg-black text-white hover:bg-green-500 hover:text-black hover:font-bold'
                   >
-                    approve
+                    Approve
+                  </button>
+                  <button
+                    onClick={() => {
+                      handleAddWarning(disaster.user.id);
+                    }}
+                    className='bg-black text-white hover:bg-orange-500 hover:text-black hover:font-bold'
+                  >
+                    Spam
                   </button>
                   <button
                     onClick={() => handleDelete(disaster.id)}
-                    className='bg-red-500'
+                    className='bg-black text-white hover:bg-red-500 hover:text-black hover:font-bold'
                   >
-                    delete
+                    Delete
                   </button>
                 </td>
               </tr>
