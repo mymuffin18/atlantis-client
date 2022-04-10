@@ -34,13 +34,13 @@ const Map = ({
 		latitude: 37.8,
 		longitude: -122.4,
 	});
-	const [status, setStatus] = useState('');
+
 	const [popupPosition, setPopupPosition] = useState(null);
 	const [userPosition, setUserPosition] = useState({});
 	const [disasterPopup, setDisasterPopup] = useState({});
 	const [showEarthquakes, setShowEarthquakes] = useState({});
 	const { state: popupState } = usePopup();
-	console.log(disasterReports.approvedDisasters);
+
 	useEffect(() => {
 		if (popupState.longitude !== null) {
 			setViewState((vp) => ({
@@ -67,15 +67,6 @@ const Map = ({
 
 	const closePopup = () => {
 		setPopupPosition(null);
-		setStatus('');
-	};
-
-	const createDisaster = () => {
-		setStatus('create-disaster');
-	};
-
-	const createLocation = () => {
-		setStatus('create-location');
 	};
 
 	const hideCurrentLocation = () => {
@@ -217,30 +208,11 @@ const Map = ({
 					onClose={closePopup}
 				>
 					<Card>
-						{status === '' ? (
-							<div className='flex flex-col'>
-								<button
-									className='popup-button'
-									onClick={createDisaster}
-								>
-									Report a disaster.
-								</button>
-								<button
-									className='popup-button'
-									onClick={createLocation}
-								>
-									Save a location.
-								</button>
-							</div>
-						) : status === 'create-disaster' ? (
-							<DisasterForm
-								latitude={popupPosition.latitude}
-								longitude={popupPosition.longitude}
-								onClose={closePopup}
-							/>
-						) : (
-							<span>hello</span>
-						)}
+						<DisasterForm
+							latitude={popupPosition.latitude}
+							longitude={popupPosition.longitude}
+							onClose={closePopup}
+						/>
 					</Card>
 				</Popup>
 			)}
