@@ -182,3 +182,27 @@ export const ApproveDis = async (token) => {
   }
   return { data };
 };
+
+export const AddWarning = async (id, token) => {
+  await axios.put(
+    `${API_URL}/api/v1/users/add_warning/${id}`,
+    {},
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
+};
+
+export const ClearWarnings = async (id, token) => {
+  await axios.put(
+    `${API_URL}/api/v1/users/clear_warning/${id}`,
+    {},
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
+};

@@ -12,28 +12,32 @@ function Sidebar() {
   };
   return (
     <div className='h-screen bg-black text-white text-center'>
-      <div className='mb-10 mt-5'>
-        <h1 className='text-white underline'>ATLANTIS</h1>
+      <div className='h-1/8 flex justify-center items-center border-b-2 border-gray-400'>
+        <h1 className='text-white'>ATLANTIS</h1>
       </div>
       <Link to='userlist'>
-        <div className='py-10 hover:bg-slate-600'>
+        <div className='h-1/8 flex justify-center items-center hover:bg-slate-600'>
           <h2>User's List</h2>
         </div>
       </Link>
       <Link to='approved-disaster'>
-        <div className='py-10 hover:bg-slate-600'>
-          <h2>Approved Disaster reports</h2>
+        <div className='h-1/8 flex justify-center items-center hover:bg-slate-600'>
+          <h2>Approved Disaster Reports</h2>
         </div>
       </Link>
       <Link to='pending-disaster'>
-        <div className='py-10 hover:bg-slate-600'>
-          <h2>Pending Disaster reports</h2>
+        <div className='h-1/8 flex justify-center items-center hover:bg-slate-600'>
+          <h2>Pending Disaster Reports</h2>
         </div>
       </Link>
-      <div className='absolute bottom-2 left-5'>
-        <button className='bg-slate-700' onClick={handleLogout}>
-          Logout
-        </button>
+      <div className='h-1/2 flex justify-center items-end'>
+        {/* <div className='absolute bottom-2 left-5'> */}
+        <div
+          className='border-t-2 border-gray-400 hover:bg-red-800 hover:font-bold w-full h-1/8 flex justify-center items-center'
+          onClick={handleLogout}
+        >
+          <div className='text-2xl'>Logout</div>
+        </div>
       </div>
     </div>
   );

@@ -50,13 +50,13 @@ function ApproveDisaster() {
                 <td className='flex justify-center gap-2'>
                   <button
                     onClick={() => handleDisapprove(disaster.id)}
-                    className='bg-green-500'
+                    className='bg-black text-white hover:bg-gray-300 hover:text-black'
                   >
                     disapprove
                   </button>
                   <button
                     // onClick={() => handleDelete(disaster.id)}
-                    className='bg-red-500'
+                    className='bg-black text-white hover:bg-gray-300 hover:text-black'
                   >
                     delete
                   </button>
