@@ -53,6 +53,8 @@ const DisasterForm = ({ latitude, longitude, onClose }) => {
 			userState.token
 		);
 
+		console.log('status', status);
+
 		// {
 		// 	disaster_id: disasterId,
 		// 	description: description,
@@ -62,7 +64,10 @@ const DisasterForm = ({ latitude, longitude, onClose }) => {
 		// 	latitude,
 		// 	longitude,
 		// },
-
+		if (status === 403) {
+			alert('You are suspended from reporting.');
+			onClose();
+		}
 		if (status === 401) {
 			setLoading(false);
 			onClose();
@@ -74,9 +79,6 @@ const DisasterForm = ({ latitude, longitude, onClose }) => {
 			setImagesErrors(errors.images);
 			setDisasterLevelErrors(errors.disaster_level);
 			setLoading(false);
-		} else if (status === 403) {
-			alert('You are suspended from reporting.');
-			onClose();
 		} else {
 			setLoading(false);
 			reportsDispatch({
