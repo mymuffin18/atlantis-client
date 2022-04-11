@@ -114,14 +114,14 @@ function DashboardUser() {
 			data,
 			user.state.token
 		);
-		if (status === 403) {
-			alert('You are suspended from reporting.');
-		}
+
 		if (status === 401) {
 			setLoading(false);
 			dispatch({ type: 'LOGOUT' });
+		} else if (status === 403) {
+			alert('You are suspended from reporting.');
 		} else if (!_.isEmpty(errors)) {
-			alert(errors);
+			console.log(errors);
 		} else {
 			disasterReportDispatch({
 				type: 'CREATE_DISASTER',
@@ -148,12 +148,12 @@ function DashboardUser() {
 			data,
 			user.state.token
 		);
-		if (status === 403) {
-			alert('You are suspended from reporting.');
-		}
+
 		if (status === 401) {
 			setLoading(false);
 			dispatch({ type: 'LOGOUT' });
+		} else if (status === 403) {
+			alert('You are suspended from reporting.');
 		} else if (!_.isEmpty(errors)) {
 			alert(errors);
 		} else {
@@ -182,12 +182,12 @@ function DashboardUser() {
 			data,
 			user.state.token
 		);
-		if (status === 403) {
-			alert('You are suspended from reporting.');
-		}
+
 		if (status === 401) {
 			setLoading(false);
 			dispatch({ type: 'LOGOUT' });
+		} else if (status === 403) {
+			alert('You are suspended from reporting.');
 		} else if (!_.isEmpty(errors)) {
 			alert(errors);
 		} else {
@@ -216,12 +216,12 @@ function DashboardUser() {
 			data,
 			user.state.token
 		);
-		if (status === 403) {
-			alert('You are suspended from reporting.');
-		}
+
 		if (status === 401) {
 			setLoading(false);
 			dispatch({ type: 'LOGOUT' });
+		} else if (status === 403) {
+			alert('You are suspended from reporting.');
 		} else if (!_.isEmpty(errors)) {
 			alert(errors);
 		} else {
