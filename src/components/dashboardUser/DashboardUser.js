@@ -130,6 +130,7 @@ function DashboardUser() {
 			setLoading(false);
 			alert('Report Created! We will review your report.');
 		}
+		setLoading(false);
 	};
 
 	const handleSendFloodReport = async () => {
@@ -164,6 +165,7 @@ function DashboardUser() {
 			setLoading(false);
 			alert('Report Created! We will review your report.');
 		}
+		setLoading(false);
 	};
 
 	const handleSendLandslideReport = async () => {
@@ -198,6 +200,7 @@ function DashboardUser() {
 			setLoading(false);
 			alert('Report Created! We will review your report.');
 		}
+		setLoading(false);
 	};
 
 	const handleSendTornadoReport = async () => {
@@ -232,6 +235,7 @@ function DashboardUser() {
 			setLoading(false);
 			alert('Report Created! We will review your report.');
 		}
+		setLoading(false);
 	};
 
 	const handleLogout = async () => {

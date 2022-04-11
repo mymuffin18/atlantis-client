@@ -71,6 +71,7 @@ const DisasterForm = ({ latitude, longitude, onClose }) => {
 			userDispatch({ type: 'LOGOUT' });
 		} else if (status === 403) {
 			alert('You are suspended from reporting.');
+			setLoading(false);
 			onClose();
 		} else if (!_.isEmpty(errors)) {
 			setDisasterIdErrors(errors.disaster);
