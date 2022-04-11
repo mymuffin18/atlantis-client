@@ -74,6 +74,9 @@ const DisasterForm = ({ latitude, longitude, onClose }) => {
 			setImagesErrors(errors.images);
 			setDisasterLevelErrors(errors.disaster_level);
 			setLoading(false);
+		} else if (status === 403) {
+			alert('You are suspended from reporting.');
+			onClose();
 		} else {
 			setLoading(false);
 			reportsDispatch({
