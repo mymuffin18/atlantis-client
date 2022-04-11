@@ -1,3 +1,4 @@
+/* eslint-disable import/no-webpack-loader-syntax */
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import ReactMapGL, {
@@ -18,7 +19,14 @@ import { useDisasterReports } from '../../context/DisasterReportContextProvider'
 import CustomPin from './CustomPin';
 import DisasterReport from './DisasterReport';
 import { usePopup } from '../../context/PopupContextProvider';
+import mapboxgl from 'mapbox-gl';
 
+// The following is required to stop "npm build" from transpiling mapbox code.
+// notice the exclamation point in the import.
+// @ts-ignore
+
+mapboxgl.workerClass =
+	require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 const Map = ({
 	earthquakeCheck,
 	pendingReportsCheck,
