@@ -15,7 +15,7 @@ function Sidebar() {
       <div className='h-1/8 flex justify-center items-center border-b-2 border-gray-400'>
         <h1 className='text-white'>ATLANTIS</h1>
       </div>
-      <Link to='userlist'>
+      <Link to='/admin/dashboard'>
         <div className='h-1/8 flex justify-center items-center hover:bg-slate-600'>
           <h2>User's List</h2>
         </div>
