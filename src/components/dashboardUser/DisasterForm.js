@@ -182,6 +182,7 @@ const DisasterForm = ({ latitude, longitude, onClose }) => {
 					value={disasterLevel}
 					onChange={(e) => setDisasterLevel(e.target.value)}
 				>
+					<option value=''></option>
 					<option value='weak'>Weak</option>
 					<option value='not-bad'>Good</option>
 					<option value='danger'>Danger</option>

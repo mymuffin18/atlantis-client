@@ -31,6 +31,7 @@ const EarthquakeData = ({ id }) => {
 				!_.isEmpty(earthquake) && (
 					<div>
 						<p>Place: {earthquake.properties.place}</p>
+						<p>Type: Earthquake</p>
 						<p>Magnitude: {earthquake.properties.mag}</p>
 						<p>
 							Depth: {earthquake.geometry.coordinates[2]}{' '}

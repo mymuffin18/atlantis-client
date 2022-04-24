@@ -9,6 +9,7 @@ const DisasterReport = ({ data: reportData = {}, setDisasterPopup }) => {
 
 	const [data, setData] = useState(reportData);
 	const [loading, setLoading] = useState(false);
+	console.log(data);
 	const vote = async () => {
 		setLoading(true);
 		const { data: return_data, status } = await voteReport(
@@ -66,9 +67,17 @@ const DisasterReport = ({ data: reportData = {}, setDisasterPopup }) => {
 
 			<div className='flex gap-2'>
 				<p>
-					<strong>Description</strong>
+					<strong>Description:</strong>
 				</p>
 				<p className='text-justify text-wrap'>{data.description}</p>
+			</div>
+			<div className='flex gap-2'>
+				<p>
+					<strong>Disaster Type:</strong>
+				</p>
+				<p className='text-justify text-wrap'>
+					{data.disaster.disaster_type}
+				</p>
 			</div>
 			<div className='flex gap-2'>
 				<span>Date occured: </span>
@@ -95,6 +104,18 @@ const DisasterReport = ({ data: reportData = {}, setDisasterPopup }) => {
 					</button>
 				</div>
 			)}
+
+			{data.approved && (
+				<div className='flex gap-2'>
+					<p>
+						<strong>Approved by:</strong>
+					</p>
+					<p className='text-justify text-wrap'>
+						{data.approved_by}
+					</p>
+				</div>
+			)}
+
 			{data.user.id === userState.user.id && (
 				<div>
 					<div
