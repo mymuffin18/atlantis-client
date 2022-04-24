@@ -73,7 +73,7 @@ function PendingDisaster() {
 		dispatch({ type: 'LOGOUT' });
 	};
 	return (
-		<div>
+		<div className='overflow-y-auto overflow-x-hidden h-screen'>
 			<div className='mb-10 mt-5'>
 				<h1>Pending Disaster Reports</h1>
 			</div>

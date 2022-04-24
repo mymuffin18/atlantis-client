@@ -40,7 +40,7 @@ function ApproveDisaster() {
 	};
 
 	return (
-		<div>
+		<div className='h-screen overflow-y-auto overflow-x-hidden'>
 			<div className='mb-10 mt-5'>
 				<h1>Approved Disaster Reports</h1>
 			</div>

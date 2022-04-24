@@ -42,7 +42,7 @@ function UserList() {
 		dispatch({ type: 'LOGOUT' });
 	};
 	return (
-		<div>
+		<div className='h-screen overflow-y-auto overflow-x-hidden'>
 			<div className='mb-10 mt-5'>
 				<h1>User's List</h1>
 			</div>
