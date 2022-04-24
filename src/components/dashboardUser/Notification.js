@@ -14,7 +14,7 @@ function Notification() {
 		(async () => {
 			const data = await getUnapprovedReports(state.token);
 			setPendingDisasters(data.data);
-			console.log(pendingDisasters);
+			console.log(data);
 		})();
 	}, []);
 
@@ -46,33 +46,47 @@ function Notification() {
 					</div>
 				</div>
 				<div className='h-11/12 w-full'>
-					<div className='my-3'>
-						<h1>Notification</h1>
+					<div className='my-3 ml-2'>
+						<h1 className='text-3xl font-bold'>
+							Notifications
+						</h1>
 					</div>
 					<div className='mx-2 overflow-y-auto overflow-x-hidden'>
-						{pendingDisasters.length > 0 &&
-							pendingDisasters
-								.sort((a, b) =>
-									a.itemM > b.itemM ? 1 : -1
-								)
-								.map((disaster) => (
-									<p
-										className='text-xs md:text-base mb-2 cursor-pointer'
-										onClick={() =>
-											handleNavigate(disaster)
-										}
-									>
-										A reported{' '}
-										{
-											disaster.disaster
-												.disaster_type
-										}{' '}
-										at{' '}
-										{new Date(
-											disaster.date_occured
-										).toLocaleString()}
-									</p>
-								))}
+						<div className='flex flex-col gap-1'>
+							{pendingDisasters.length > 0 &&
+								pendingDisasters
+									.sort((a, b) =>
+										a.itemM > b.itemM ? 1 : -1
+									)
+									.map((disaster) => (
+										<div
+											key={disaster.id}
+											className='border border-gray-400 p-3 cursor-pointer'
+											onClick={() =>
+												handleNavigate(
+													disaster
+												)
+											}
+										>
+											<p className='text-xs md:text-base mb-2'>
+												{
+													disaster.user
+														.fullname
+												}{' '}
+												reported{' '}
+												{
+													disaster
+														.disaster
+														.disaster_type
+												}{' '}
+												at{' '}
+												{new Date(
+													disaster.date_occured
+												).toLocaleString()}
+											</p>
+										</div>
+									))}
+						</div>
 					</div>
 				</div>
 			</div>
